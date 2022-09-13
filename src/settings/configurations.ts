@@ -1,8 +1,61 @@
+const mergeTagsLits = [
+  {
+    value: 'Current.Date',
+    title: 'Current date in DD/MM/YYYY format'
+  },
+  {
+    value: 'Campaign.Toc',
+    title: 'Linked table of contents in your campaign'
+  },
+  {
+    title: 'Phone',
+    menu: [
+      {
+        value: 'Phone.Home'
+      },
+      {
+        value: 'Phone.work'
+      }
+    ]
+  },
+  {
+    title: 'Person',
+    menu: [
+      {
+        value: 'Person.Name'
+      },
+      {
+        value: 'Person.Name.First'
+      },
+      {
+        value: 'Person.Name.Last'
+      },
+      {
+        value: 'Person.Name.Full'
+      },
+      {
+        title: 'Email',
+        menu: [
+          {
+            value: 'Person.Email.Work'
+          },
+          {
+            value: 'Person.Email.Home'
+          }
+        ]
+      }
+    ]
+  }
+];
+
 export const classic = {
-  plugins: "advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount",
+  plugins: "advlist autocorrect autolink lists link image charmap mergetags preview anchor searchreplace visualblocks code fullscreen footnotes insertdatetime media table help wordcount",
   height: 600,
   toolbar:
-    "insertfile undo redo | styles | bold italic | wordcount | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table help",
+    "insertfile undo redo | styles | bold italic | wordcount | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | footnotes footnotesupdate | table help",
+  mergetags_list: mergeTagsLits,
+  autocorrect_autocorrect: true,
+  autocorrect_capitalize: true,
   mobile: {
     theme: "silver",
     plugins: "casechange link image lists advlist anchor code codesample preview table textpattern help wordcount",
@@ -84,7 +137,8 @@ export const resize = {
     "advtable", "autoresize", "anchor", "advlist", "autolink", "autosave", "charmap", "advcode", "codesample", "directionality", "emoticons", "fullscreen",
     "help", "image", "insertdatetime", "importcss", "link", "lists", "media", "nonbreaking", "pagebreak", "preview", "save", "searchreplace", "table",
     "template", "visualblocks", "visualchars", "wordcount", "casechange", "checklist", "powerpaste", "a11ychecker", "tinymcespellchecker", "tinydrive",
-    "tableofcontents", "editimage", "mentions", "mediaembed", "permanentpen", "formatpainter", "pageembed", "linkchecker", "tinycomments", "export"
+    "tableofcontents", "editimage", "mentions", "mediaembed", "permanentpen", "formatpainter", "pageembed", "linkchecker", "tinycomments", "export",
+    "autocorrect", "mergetags", "footnotes"
   ],
   // The toolbar_mode option will no-longer accept the false value in TinyMCE 6.0, which was retained for backwards compatibility with the toolbar_drawer option. Use 'wrap' instead to keep the same functionality as false.
   // toolbar_mode : Default Value: 'floating' / Possible Values: 'floating', 'sliding', 'scrolling', or 'wrap'
@@ -92,6 +146,57 @@ export const resize = {
   toolbar_sticky: true,
   toolbar_location: 'top', //top, bottom
   toolbar_sticky_offset: 10,
+  mergetags_list: [
+    {
+      value: 'Current.Date',
+      title: 'Current date in DD/MM/YYYY format'
+    },
+    {
+      value: 'Campaign.Toc',
+      title: 'Linked table of contents in your campaign'
+    },
+    {
+      title: 'Phone',
+      menu: [
+        {
+          value: 'Phone.Home'
+        },
+        {
+          value: 'Phone.work'
+        }
+      ]
+    },
+    {
+      title: 'Person',
+      menu: [
+        {
+          value: 'Person.Name'
+        },
+        {
+          value: 'Person.Name.First'
+        },
+        {
+          value: 'Person.Name.Last'
+        },
+        {
+          value: 'Person.Name.Full'
+        },
+        {
+          title: 'Email',
+          menu: [
+            {
+              value: 'Person.Email.Work'
+            },
+            {
+              value: 'Person.Email.Home'
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  autocorrect_autocorrect: true,
+  autocorrect_capitalize: true,
   // Tiny Comments
   tinycomments_mode: 'embedded',
   tinycomments_author: 'qauser8@qa.com',

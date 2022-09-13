@@ -3,16 +3,16 @@
   <ul id='channels'>
     <li v-for='channel in channels' :key='channel.value'>
       <div >
-        <a :href='baseUrl + "?channel=" + channel.value'>{{ channel.name }}</a>
+        <a :href='baseUrl + "?channel=" + channel.value + "&api-key=" + apiKey' >{{ channel.name }}</a>
       </div>
     </li>
   </ul>
-  <tiny-editor :channel="channel" :conf="conf.classic" :snippet="snippets.basic" title="Classic Editor" />
-  <tiny-editor :channel="channel" :conf="conf.inline" :snippet="snippets.basic" title="Inline Editor" />
-  <tiny-editor :channel="channel" :conf="conf.quickbars" :snippet="snippets.basic" title="Quickbars Editor" />
-  <tiny-editor :channel="channel" :conf="conf.bottom" :snippet="snippets.basic" title="Bottom Toolbar Editor" />
-  <tiny-editor :channel="channel" :conf="conf.resize" :snippet="snippets.full" title="Resize Editor" />
-  <tiny-editor :channel="channel" :conf="conf.template" :snippet="snippets.template" title="Template Editor" />
+  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.classic" :snippet="snippets.basic" title="Classic Editor" />
+  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.inline" :snippet="snippets.basic" title="Inline Editor" />
+  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.quickbars" :snippet="snippets.basic" title="Quickbars Editor" />
+  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.bottom" :snippet="snippets.basic" title="Bottom Toolbar Editor" />
+  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.resize" :snippet="snippets.full" title="Resize Editor" />
+  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.template" :snippet="snippets.template" title="Template Editor" />
 </template>
 
 <script>
@@ -29,6 +29,7 @@ export default {
     const baseUrl = window.location.href.indexOf('?') > 0 ? window.location.href.substring(0, window.location.href.indexOf('?')) : window.location.href;
     const params = new URLSearchParams(window.location.search);
     const channel = params.get('channel') || '6-dev';
+    const apiKey = params.get('api-key') || 'b1g4d59rwwqxx1vj7mci23rjj8ubgb46i4xsio6ieig6fkps';
     const conf = {
       classic,
       inline,
@@ -55,6 +56,7 @@ export default {
       channels,
       baseUrl,
       channel,
+      apiKey,
       conf,
       snippets
     }

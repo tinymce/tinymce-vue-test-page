@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>{{ title }}</h2>
-    <editor :api-key="apiKey" :init="conf" :initialValue="snippet" />
+    <editor :cloudChannel="channel" :api-key="apiKey" :init="conf" :initialValue="snippet" />
   </div>
 </template>
 <script>
@@ -12,14 +12,14 @@ export default {
   props: {
     title: String,
     conf: Object,
-    snippet: String
+    snippet: String,
+    channel: String,
+    apiKey: String
   },
   components: { editor: Editor },
   setup() {
-    const apiKey = 'b1g4d59rwwqxx1vj7mci23rjj8ubgb46i4xsio6ieig6fkps';
-    return {
-      apiKey,
-    };
+    // Add code here, I mean if you want
+    return {};
   },
 }
 </script>
