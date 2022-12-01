@@ -49,10 +49,10 @@ const mergeTagsLits = [
 ];
 
 export const classic = {
-  plugins: "advlist autocorrect autolink lists link image charmap mergetags preview anchor searchreplace visualblocks code fullscreen footnotes insertdatetime media table help wordcount",
+  plugins: "advlist autocorrect autolink lists link image charmap mergetags preview anchor searchreplace visualblocks code fullscreen footnotes insertdatetime media table help wordcoun typography inlinecss",
   height: 600,
   toolbar:
-    "insertfile undo redo | styles | bold italic | wordcount | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | footnotes footnotesupdate | table help",
+    "insertfile undo redo | styles typography | bold italic | wordcount | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | footnotes footnotesupdate | table help",
   mergetags_list: mergeTagsLits,
   autocorrect_autocorrect: true,
   autocorrect_capitalize: true,
@@ -67,9 +67,9 @@ export const classic = {
 
 export const inline = {
   inline: true,
-  plugins: "advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help",
+  plugins: "advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help typography inlinecss",
   toolbar:
-    "insertfile undo redo | styles | bold italic | permanentpen | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table help",
+    "insertfile undo redo | styles typography| bold italic | permanentpen | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table help",
   mobile: {
     theme: "silver",
     plugins: "casechange lists advlist anchor code codesample preview table textpattern help",
@@ -79,9 +79,9 @@ export const inline = {
 };
 
 export const quickbars = {
-  plugins: "quickbars advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help",
+  plugins: "quickbars advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help typography inlinecss",
   toolbar:
-    "insertfile undo redo | styles | bold italic | permanentpen | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table help",
+    "insertfile undo redo | styles typography | bold italic | permanentpen | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table help",
   quickbars_insert_toolbar:
     "quicktable quickimage quicklink styles ",
   quickbars_selection_toolbar:
@@ -120,16 +120,16 @@ export const quickbars = {
 };
 
 export const bottom = {
-  plugins: "quickbars advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help",
+  plugins: "quickbars advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help typography inlinecss",
   toolbar_mode: "sliding",
   toolbar_sticky: true,
   toolbar_location: "bottom",
   toolbar:
-      "insertfile undo redo | styles | bold italic | permanentpen | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table help",
+    "insertfile undo redo | styles typography| bold italic | permanentpen | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table help",
   quickbars_insert_toolbar:
-      "quicktable quickimage quicklink styles ",
+    "quicktable quickimage quicklink styles ",
   quickbars_selection_toolbar:
-      "bold italic | h2 h3 | blockquote | code| forecolor backcolor | quicktable quickimage | styles ",
+    "bold italic | h2 h3 | blockquote | code| forecolor backcolor | quicktable quickimage | styles ",
 };
 
 export const resize = {
@@ -138,7 +138,7 @@ export const resize = {
     "help", "image", "insertdatetime", "importcss", "link", "lists", "media", "nonbreaking", "pagebreak", "preview", "save", "searchreplace", "table",
     "template", "visualblocks", "visualchars", "wordcount", "casechange", "checklist", "powerpaste", "a11ychecker", "tinymcespellchecker", "tinydrive",
     "tableofcontents", "editimage", "mentions", "mediaembed", "permanentpen", "formatpainter", "pageembed", "linkchecker", "tinycomments", "export",
-    "autocorrect", "mergetags", "footnotes"
+    "autocorrect", "mergetags", "footnotes", "typography", "inlinecss"
   ],
   // The toolbar_mode option will no-longer accept the false value in TinyMCE 6.0, which was retained for backwards compatibility with the toolbar_drawer option. Use 'wrap' instead to keep the same functionality as false.
   // toolbar_mode : Default Value: 'floating' / Possible Values: 'floating', 'sliding', 'scrolling', or 'wrap'
@@ -203,7 +203,7 @@ export const resize = {
   tinycomments_author_name: 'SuperCoolQA',
   quickbars_insert_toolbar: 'quicktable quickimage quicklink styles',
   quickbars_selection_toolbar: 'bold italic | h2 h3 | blockquote | code| forecolor backcolor | quicktable quickimage | formatpainter pageembed permanentpen styles ',
-  toolbar: "bold italic underline strikethrough subscript superscript | fontfamily fontsize | numlist bullist checklist | permanentpen formatpainter removeformat forecolor backcolor | blockquote nonbreaking hr pagebreak | casechange styles blocks lineheight | ltr rtl outdent indent | align alignleft aligncenter alignright alignjustify alignnone | h1 h2 h3 h4 h5 h6 h7 |" +
+  toolbar: "bold italic underline strikethrough subscript superscript typography| fontfamily fontsize | numlist bullist checklist | permanentpen formatpainter removeformat forecolor backcolor | blockquote nonbreaking hr pagebreak | casechange styles blocks lineheight | ltr rtl outdent indent | align alignleft aligncenter alignright alignjustify alignnone | h1 h2 h3 h4 h5 h6 h7 |" +
     "copy cut paste pastetext selectall remove newdocument wordcount searchreplace | undo redo | save cancel restoredraft | fullscreen print preview export code help | template insertdatetime codesample emoticons charmap | anchor link unlink image media pageembed insertfile | visualblocks visualchars a11ycheck | spellchecker language spellcheckdialog | tableofcontents tableofcontentsupdate | " +
     "table advtablerownumbering tableclass tablecellclass tablecellvalign tablecellborderwidth tablecellborderstyle tablecaption tablecellbackgroundcolor tablecellbordercolor tablerowheader tablecolheader",
   menubar: 'file edit insert view format table tools help',
