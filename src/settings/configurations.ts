@@ -114,43 +114,44 @@ const advtemplate_templates = [
     ]
   }
 ];
+const ai_request = (req, respondWith) => {
+  if (req.prompt.includes('error')) {
+    respondWith.string(() => Promise.reject(req.prompt));
+  } else {
+    if (!document.querySelector('#streaming')?.checked) {
+      respondWith.string(() => Promise.resolve(req.prompt));
+    } else {
+      respondWith.stream((signal, onMessage) => {
+        return new Promise((resolve, reject) => {
+          const messages = [
+          ];
 
-// const ai_request = (req: any, respondWith: any) => {
-//   if (req.prompt.includes('error')) {
-//     respondWith.string(() => Promise.reject(req.prompt));
-//   } else {
-//     if (!document.querySelector<HTMLInputElement>('#streaming')?.checked) {
-//       respondWith.string(() => Promise.resolve(req.prompt));
-//     } else {
-//       respondWith.stream((signal:any, onMessage: any) => {
-//         return new Promise<void>((resolve, reject) => {
-//           const messages: string[] = [
-//           ];
-//           for(var i =0; i <= 30; i++) {
-//             messages.push(' Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
-//           }
-//           messages.push('</p><p>Streaming complete!</p>');
-//           const interval = setInterval(() => {
-//             if (messages.length > 0) {
-//               // Mock Proxy by having try-catch block
-//               try {
-//                 onMessage(messages.splice(0, 1).join(''));
-//               } catch (e) {
-//                 reject(e);
-//               }
-//             } else {
-//               clearInterval(interval);
-//               resolve();
-//             }
-//           }, 300);
-//           signal.addEventListener('abort', () => clearInterval(interval));
-//         });
-//       });
-//     }
-//   }
-// };
+          for(var i =0; i <= 30; i++) {
+            messages.push(' Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+          }
+          messages.push('</p><p>Streaming complete!</p>');
+          const interval = setInterval(() => {
+            if (messages.length > 0) {
+              // Mock Proxy by having try-catch block
+              try {
+                onMessage(messages.splice(0, 1).join(''));
+              } catch (e) {
+                reject(e);
+              }
+            } else {
+              clearInterval(interval);
+              resolve();
+            }
+          }, 300);
+          signal.addEventListener('abort', () => clearInterval(interval));
+        });
+      });
+    }
+  }
+};
 
 const baseConfig = {
+    ai_request: ai_request,
     height: 600,
     mergetags_prefix: '${',
     mergetags_suffix: '}',
