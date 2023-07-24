@@ -7,6 +7,7 @@
       </div>
     </li>
   </ul>
+  <p><label><input type="checkbox" id="streaming" /> Stream response</label></p>
   <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.classic" :snippet="snippets.basic" title="Classic Editor" />
   <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.inline" :snippet="snippets.basic" title="Inline Editor" />
   <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.quickbars" :snippet="snippets.basic" title="Quickbars Editor" />

@@ -114,51 +114,108 @@ const advtemplate_templates = [
     ]
   }
 ];
+const ai_request = (req, respondWith) => {
+  if (req.prompt.includes('error')) {
+    respondWith.string(() => Promise.reject(req.prompt));
+  } else {
+    if (!document.querySelector('#streaming')?.checked) {
+      respondWith.string(() => Promise.resolve(req.prompt));
+    } else {
+      respondWith.stream((signal, onMessage) => {
+        return new Promise((resolve, reject) => {
+          const messages = [
+          ];
+
+          for(var i =0; i <= 30; i++) {
+            messages.push(' Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+          }
+          messages.push('</p><p>Streaming complete!</p>');
+          const interval = setInterval(() => {
+            if (messages.length > 0) {
+              // Mock Proxy by having try-catch block
+              try {
+                onMessage(messages.splice(0, 1).join(''));
+              } catch (e) {
+                reject(e);
+              }
+            } else {
+              clearInterval(interval);
+              resolve();
+            }
+          }, 300);
+          signal.addEventListener('abort', () => clearInterval(interval));
+        });
+      });
+    }
+  }
+};
+
+const baseConfig = {
+    ai_request: ai_request,
+    height: 600,
+    mergetags_prefix: '${',
+    mergetags_suffix: '}',
+    mergetags_list: mergeTagsLits,
+    autocorrect_autocorrect: true,
+    autocorrect_capitalize: true,
+    advcode_inline: true,
+    advtemplate_templates: advtemplate_templates,
+    mobile: {
+      theme: "silver",
+      contextmenu: "link image table preview",
+    }
+  };
+
+const basePlugins = {
+  plugins: "accordion ai advlist advtemplate autolink autocorrect mergetags footnotes lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount typography inlinecss quickbars",
+}
+
+const advancePlugins = {
+  plugins: [
+    "accordion", "ai", "advtable", "autoresize", "anchor", "advlist", "autolink", "autosave", "charmap", "advcode", "codesample", "directionality", "emoticons", "fullscreen",
+    "help", "image", "insertdatetime", "importcss", "link", "lists", "media", "nonbreaking", "pagebreak", "preview", "save", "searchreplace", "table",
+    "advtemplate", "visualblocks", "visualchars", "wordcount", "casechange", "checklist", "powerpaste", "a11ychecker", "tinymcespellchecker", "tinydrive",
+    "tableofcontents", "editimage", "mentions", "mediaembed", "permanentpen", "formatpainter", "pageembed", "linkchecker", "tinycomments", "export",
+    "autocorrect", "mergetags", "footnotes", "typography", "inlinecss"
+  ],
+}
+
+const baseToolbar = {
+  toolbar:
+    " aidialog aishortcuts accordion bold italic underline strikethrough casechange | wordcount numlist bullist | h1 h2 h3 | table preview code codesample help",
+}
+
+const advanceToolbar = {
+  toolbar: "aidialog aishortcuts bold italic underline strikethrough subscript superscript addtemplate inserttemplate accordion | fontfamily fontsize fontsizeinput | numlist bullist checklist | permanentpen formatpainter removeformat forecolor backcolor | blockquote nonbreaking hr pagebreak | casechange styles blocks lineheight | ltr rtl outdent indent | align alignleft aligncenter alignright alignjustify alignnone | h1 h2 h3 h4 h5 h6 h7 |" +
+    "copy cut paste pastetext selectall remove newdocument wordcount searchreplace | undo redo | save cancel restoredraft | fullscreen print preview export code help | template insertdatetime codesample emoticons charmap | anchor link unlink image media pageembed insertfile | visualblocks visualchars a11ycheck | spellchecker language spellcheckdialog | tableofcontents tableofcontentsupdate | " +
+    "table advtablerownumbering tableclass tablecellclass tablecellvalign tablecellborderwidth tablecellborderstyle tablecaption tablecellbackgroundcolor tablecellbordercolor tablerowheader tablecolheader",
+}
+
+const quickBar = {
+  quickbars_insert_toolbar:
+    'quicktable quickimage quicklink styles',
+  quickbars_selection_toolbar:
+    'bold italic | h2 h3 | blockquote | code| forecolor backcolor typography| quicktable quickimage | formatpainter pageembed permanentpen styles ',
+}
 
 export const classic = {
-  plugins: "advlist advtemplate autocorrect autolink lists link image charmap mergetags preview anchor searchreplace visualblocks code fullscreen footnotes insertdatetime media table help wordcoun typography inlinecss",
-  height: 600,
-  toolbar:
-    "insertfile undo redo addtemplate inserttemplate | styles typography fontsizeinput| bold italic | wordcount | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | footnotes footnotesupdate | table help",
-  mergetags_list: mergeTagsLits,
-  autocorrect_autocorrect: true,
-  autocorrect_capitalize: true,
-  advcode_inline: true,
-  advtemplate_templates,
-  mobile: {
-    theme: "silver",
-    plugins: "casechange link image lists advlist anchor code codesample preview table textpattern help wordcount",
-    toolbar:
-      " casechange bold italic underline strikethrough | wordcount numlist bullist | h1 h2 h3 | table preview code codesample help",
-    contextmenu: "link image table preview",
-  },
+  ...baseConfig,
+  ...basePlugins,
+  ...baseToolbar,
 };
 
 export const inline = {
   inline: true,
-  plugins: "advlist advtemplate autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help typography inlinecss",
-  toolbar:
-    "insertfile undo redo addtemplate inserttemplate | styles typography fontsizeinput| bold italic | permanentpen | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table help",
-  advcode_inline: true,
-  advtemplate_templates,
-  mobile: {
-    theme: "silver",
-    plugins: "casechange lists advlist anchor code codesample preview table textpattern help",
-    toolbar:
-      " casechange bold italic underline strikethrough | formatpainter numlist bullist | h1 h2 h3 | table preview code codesample help",
-  },
+  ...baseConfig,
+  ...basePlugins,
+  ...baseToolbar
 };
 
 export const quickbars = {
-  plugins: "quickbars advlist advtemplate autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help typography inlinecss",
-  toolbar:
-    "insertfile undo redo addtemplate inserttemplate | styles typography fontsizeinput | bold italic | permanentpen | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table help",
-  quickbars_insert_toolbar:
-    "quicktable quickimage quicklink styles ",
-  quickbars_selection_toolbar:
-    "bold italic | h2 h3 | blockquote | code| forecolor backcolor | quicktable quickimage | styles ",
-  advcode_inline: true,
-  advtemplate_templates,
+  ...baseConfig,
+  ...basePlugins,
+  ...baseToolbar,
+  ...quickBar,
   setup: function (editor) {
     editor.ui.registry.addContextToolbar("imagealignment", {
       predicate: function (node) {
@@ -193,97 +250,29 @@ export const quickbars = {
 };
 
 export const bottom = {
-  plugins: "quickbars advlist advtemplate autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help typography inlinecss",
+  ...baseConfig,
+  ...basePlugins,
+  ...baseToolbar,
+  ...quickBar,
   toolbar_mode: "sliding",
   toolbar_sticky: true,
-  toolbar_location: "bottom",
-  toolbar:
-    "insertfile undo redo addtemplate inserttemplate | styles typography fontsizeinput | bold italic | permanentpen | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table help",
-  quickbars_insert_toolbar:
-    "quicktable quickimage quicklink styles ",
-  quickbars_selection_toolbar:
-    "bold italic | h2 h3 | blockquote | code| forecolor backcolor | quicktable quickimage | styles ",
-  advcode_inline: true,
-  advtemplate_templates,
+  toolbar_location: "bottom"
 };
 
 export const resize = {
-  plugins: [
-    "advtable", "autoresize", "anchor", "advlist", "autolink", "autosave", "charmap", "advcode", "codesample", "directionality", "emoticons", "fullscreen",
-    "help", "image", "insertdatetime", "importcss", "link", "lists", "media", "nonbreaking", "pagebreak", "preview", "save", "searchreplace", "table",
-    "advtemplate", "visualblocks", "visualchars", "wordcount", "casechange", "checklist", "powerpaste", "a11ychecker", "tinymcespellchecker", "tinydrive",
-    "tableofcontents", "editimage", "mentions", "mediaembed", "permanentpen", "formatpainter", "pageembed", "linkchecker", "tinycomments", "export",
-    "autocorrect", "mergetags", "footnotes", "typography", "inlinecss"
-  ],
-  // The toolbar_mode option will no-longer accept the false value in TinyMCE 6.0, which was retained for backwards compatibility with the toolbar_drawer option. Use 'wrap' instead to keep the same functionality as false.
-  // toolbar_mode : Default Value: 'floating' / Possible Values: 'floating', 'sliding', 'scrolling', or 'wrap'
+  baseConfig,
+  advancePlugins,
+  advanceToolbar,
+  quickBar,
   toolbar_mode: 'sliding',
   toolbar_sticky: true,
   toolbar_location: 'top', //top, bottom
   toolbar_sticky_offset: 10,
-  mergetags_list: [
-    {
-      value: 'Current.Date',
-      title: 'Current date in DD/MM/YYYY format'
-    },
-    {
-      value: 'Campaign.Toc',
-      title: 'Linked table of contents in your campaign'
-    },
-    {
-      title: 'Phone',
-      menu: [
-        {
-          value: 'Phone.Home'
-        },
-        {
-          value: 'Phone.work'
-        }
-      ]
-    },
-    {
-      title: 'Person',
-      menu: [
-        {
-          value: 'Person.Name'
-        },
-        {
-          value: 'Person.Name.First'
-        },
-        {
-          value: 'Person.Name.Last'
-        },
-        {
-          value: 'Person.Name.Full'
-        },
-        {
-          title: 'Email',
-          menu: [
-            {
-              value: 'Person.Email.Work'
-            },
-            {
-              value: 'Person.Email.Home'
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  autocorrect_autocorrect: true,
-  autocorrect_capitalize: true,
   // Tiny Comments
   tinycomments_mode: 'embedded',
   tinycomments_author: 'qauser8@qa.com',
   tinycomments_author_name: 'SuperCoolQA',
-  quickbars_insert_toolbar: 'quicktable quickimage quicklink styles',
-  quickbars_selection_toolbar: 'bold italic | h2 h3 | blockquote | code| forecolor backcolor | quicktable quickimage | formatpainter pageembed permanentpen styles ',
-  toolbar: "bold italic underline strikethrough subscript superscript typography addtemplate inserttemplate | fontfamily fontsize fontsizeinput | numlist bullist checklist | permanentpen formatpainter removeformat forecolor backcolor | blockquote nonbreaking hr pagebreak | casechange styles blocks lineheight | ltr rtl outdent indent | align alignleft aligncenter alignright alignjustify alignnone | h1 h2 h3 h4 h5 h6 h7 |" +
-    "copy cut paste pastetext selectall remove newdocument wordcount searchreplace | undo redo | save cancel restoredraft | fullscreen print preview export code help | template insertdatetime codesample emoticons charmap | anchor link unlink image media pageembed insertfile | visualblocks visualchars a11ycheck | spellchecker language spellcheckdialog | tableofcontents tableofcontentsupdate | " +
-    "table advtablerownumbering tableclass tablecellclass tablecellvalign tablecellborderwidth tablecellborderstyle tablecaption tablecellbackgroundcolor tablecellbordercolor tablerowheader tablecolheader",
-  menubar: 'file edit insert view format table tools help',
-  advcode_inline: true,
-  advtemplate_templates,
+  menubar: 'file edit insert view format table footnotes footnotesupdate | tools help',
   mobile: {
     theme: "silver",
     plugins: [
@@ -528,7 +517,7 @@ export const templateConf = {
 
     #placeholder button {
       -webkit-appearance: none;
-      background: url('images/template-icon-document.png') .25rem center no-repeat transparent;
+      // background: url('../assets/images/template-icon-document.png') .25rem center no-repeat transparent;
       background-size: 20px 20px;
       border-radius: .25rem;
       border: none;
@@ -550,11 +539,11 @@ export const templateConf = {
     }
 
     #placeholder button.new-doc {
-      background-image: url('images/template-icon-new-document.png');
+      // background-image: url('images/template-icon-new-document.png');
     }
 
     #placeholder button.manage {
-      background-image: url('images/template-icon-manage.png');
+      // background-image: url('images/template-icon-manage.png');
     }
   `
 };
