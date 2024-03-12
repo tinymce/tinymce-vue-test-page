@@ -29,7 +29,7 @@ export default {
   setup() {
     const baseUrl = window.location.href.indexOf('?') > 0 ? window.location.href.substring(0, window.location.href.indexOf('?')) : window.location.href;
     const params = new URLSearchParams(window.location.search);
-    const channel = params.get('channel') || '6-dev';
+    const channel = params.get('channel') || '7-dev';
     const apiKey = params.get('api-key') || 'b1g4d59rwwqxx1vj7mci23rjj8ubgb46i4xsio6ieig6fkps';
     const conf = {
       classic,
