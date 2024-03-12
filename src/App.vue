@@ -8,7 +8,6 @@
     </li>
   </ul>
   <p><label><input type="checkbox" id="streaming" /> Stream response</label></p>
-  <button @click="showMessage"> Stream response</button>
   <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.classic" :snippet="snippets.basic" title="Classic Editor" />
   <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.inline" :snippet="snippets.basic" title="Inline Editor" />
   <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.quickbars" :snippet="snippets.basic" title="Quickbars Editor" />
@@ -21,7 +20,6 @@
 import { basic, full, template } from './settings/settings.ts';
 import { classic, inline, quickbars, bottom, resize, templateConf } from './settings/configurations.ts';
 import TinyEditorVue from './components/TinyEditor.vue';
-import { ref } from 'vue';
 
 export default {
   name: 'App',
@@ -57,41 +55,6 @@ export default {
     { name: '6 Stable', value: '6-stable' },
     ];
 
-    const editorRef = ref(null);
-
-    const showMessage = async () => {
-        // Access the current editor instance
-        if (editorRef.value) {
-          const editor = editorRef.value;
-          // Ensure you handle the asynchronous call and editor API correctly here
-          const content = editor.getContent(); // Assuming getContent() does not actually require async/await
-
-          if (editor.ui) {
-            editor.windowManager.open({
-              size: 'large',
-              title: 'Get Markdown Content',
-              body: {
-                type: 'panel',
-                items: [
-                  {
-                    type: 'textarea',
-                    flex: true,
-                    name: 'getmarkcontent',
-                    label: 'Content',
-                  },
-                ],
-              },
-              buttons: [],
-              initialData: {
-                getmarkcontent: content,
-              },
-            });
-          } else {
-            editor.windowManager.alert(content);
-          }
-        }
-      };
-
     return {
       channels,
       baseUrl,
@@ -99,7 +62,6 @@ export default {
       apiKey,
       conf,
       snippets,
-      showMessage
     }
   }
 }
