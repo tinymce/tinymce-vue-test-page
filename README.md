@@ -1,24 +1,68 @@
-# tinymce-vue-test-page
+# Tinymce Vue Test Page
 
-## Project setup
-```
+This project is built using Vue version 3
+
+## Table of Contents
+- [Setting Up the Project](#setting-up-the-project)
+- [Running the Development Server](#running-the-development-server)
+- [Building the Project](#building-the-project)
+
+## Setting Up the Project
+To install all dependencies, run:
+```bash
 yarn install
 ```
 
-### Compiles and hot-reloads for development
-```
-yarn serve
+Alternatively, you can use `npm`, `pnpm`, or `bun`:
+
+```bash
+npm install
 ```
 
-### Compiles and minifies for production
+```bash
+pnpm install
 ```
+
+```bash
+bun install
+```
+
+## Running the Development Server
+To start the development server, execute:
+```shell
+yarn start
+```
+
+For other package managers:
+```shell
+npm start
+```
+
+```shell
+pnpm start
+```
+
+```shell
+bun start
+```
+
+## Building the Project
+To compile the project, use:
+```shell
 yarn build
 ```
 
-### Lints and fixes files
-```
-yarn lint
+For other package managers:
+```shell
+npm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```shell
+pnpm run build
+```
+
+```shell
+bun run build
+```
+
+The compiled output will be placed in the `dist/` directory.
