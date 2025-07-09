@@ -1261,10 +1261,10 @@
   resolved "https://registry.yarnpkg.com/@soda/get-current-script/-/get-current-script-1.0.2.tgz#a53515db25d8038374381b73af20bb4f2e508d87"
   integrity sha512-T7VNNlYVM1SgQ+VsMYhnDkcGmWhQdL0bDyGm5TlQ3GBXnJscEClUUOKduWTmm2zCnvNLC1hc3JpuXjs/nFOc5w==
 
-"@tinymce/tinymce-vue@^5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@tinymce/tinymce-vue/-/tinymce-vue-5.1.0.tgz#e74adef6fc10702167588cb53e74be359e5005ea"
-  integrity sha512-Z4R8zaOKrAXBhHWsq+qUlwHY+rvze2RgxHDrZ5+qTYkGvRofW5880HLG9gvv6TRPVsNSQBNMdsaOjJ/eueccgA==
+"@tinymce/tinymce-vue@^5.1.1":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@tinymce/tinymce-vue/-/tinymce-vue-5.1.1.tgz#0879787e07833a4316b2eaf0417c7c6a2abce86b"
+  integrity sha512-iO57HOWesFOhsaqjA5Ea6sDvQBmJJH3/dq00Uvg7metlct2kLF+ctRgoDsetLt6gmeZ7COPftr814/XzqnJ/dg==
   dependencies:
     tinymce "^6.0.0 || ^5.5.1"
 
