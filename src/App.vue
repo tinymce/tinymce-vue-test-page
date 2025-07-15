@@ -29,7 +29,7 @@ export default {
   setup() {
     const baseUrl = window.location.href.indexOf('?') > 0 ? window.location.href.substring(0, window.location.href.indexOf('?')) : window.location.href;
     const params = new URLSearchParams(window.location.search);
-    const channel = params.get('channel') || '7-dev';
+    const channel = params.get('channel') || '8-dev';
     const apiKey = params.get('api-key') || 'prsghhxax677rv082a1zj9b7cgjuoaqysf7h8ayxi5ao43ha';
     const conf = {
       classic,
@@ -47,6 +47,8 @@ export default {
     };
 
     const channels = [
+    { name: '8 Development', value: '8-dev' },
+    { name: '8 Testing', value: '8-testing' },
     { name: '7 Development', value: '7-dev' },
     { name: '7 Testing', value: '7-testing' },
     { name: '7 Stable', value: '7-stable' },
