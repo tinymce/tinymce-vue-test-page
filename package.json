@@ -12,7 +12,7 @@
     "@tinymce/tinymce-vue": "^6.2.0",
     "core-js": "^3.6.5",
     "gh-pages": "^5.0.0",
-    "vue": "^3.3.4"
+    "vue": "^3.5.17"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.8",
