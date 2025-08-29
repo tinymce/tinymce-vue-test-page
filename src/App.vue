@@ -7,18 +7,13 @@
       </div>
     </li>
   </ul>
-  <p><label><input type="checkbox" id="streaming" /> Stream response</label></p>
-  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.classic" :snippet="snippets.basic" title="Classic Editor" />
-  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.inline" :snippet="snippets.basic" title="Inline Editor" />
-  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.quickbars" :snippet="snippets.basic" title="Quickbars Editor" />
-  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.bottom" :snippet="snippets.basic" title="Bottom Toolbar Editor" />
-  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.resize" :snippet="snippets.full" title="Resize Editor" />
-  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.template" :snippet="snippets.template" title="Template Editor" />
+  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.classic" :snippet="snippets.full" title="Classic Editor" />
+  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.inline" :snippet="snippets.full" title="Inline Editor" />
 </template>
 
 <script>
-import { basic, full, template } from './settings/settings.ts';
-import { classic, inline, quickbars, bottom, resize, templateConf } from './settings/configurations.ts';
+import { full } from './settings/settings.ts';
+import { generateConfig } from './settings/configurations.ts';
 import TinyEditorVue from './components/TinyEditor.vue';
 
 export default {
@@ -32,18 +27,12 @@ export default {
     const channel = params.get('channel') || '8-dev';
     const apiKey = params.get('api-key') || 'prsghhxax677rv082a1zj9b7cgjuoaqysf7h8ayxi5ao43ha';
     const conf = {
-      classic,
-      inline,
-      quickbars,
-      bottom,
-      resize,
-      template: templateConf
+      classic: generateConfig({ excludePlugins: ['tinydrive', 'uploadcare']}),
+      inline: generateConfig({ excludePlugins: ['tinydrive', 'editimage', 'image' ], overrides: { inline: true }})
     }
 
     const snippets = {
-      basic,
-      full,
-      template
+      full
     };
 
     const channels = [
