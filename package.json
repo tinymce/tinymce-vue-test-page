@@ -9,6 +9,7 @@
     "deploy": "yarn build && gh-pages -d dist"
   },
   "dependencies": {
+    "@microsoft/fetch-event-source": "^2.0.1",
     "@tinymce/tinymce-vue": "^6.2.0",
     "core-js": "^3.6.5",
     "gh-pages": "^5.0.0",
