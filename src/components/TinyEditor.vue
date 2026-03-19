@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>{{ title }}</h2>
-    <editor :cloudChannel="channel" :api-key="apiKey" :init="conf" :initialValue="snippet" />
+    <editor :cloudChannel="channel" :api-key="apiKey" :init="conf" :initialValue="snippet" :tinymceScriptSrc="tinymceScriptSrc"/>
   </div>
 </template>
 <script>
@@ -14,7 +14,8 @@ export default {
     conf: Object,
     snippet: String,
     channel: String,
-    apiKey: String
+    apiKey: String,
+    tinymceScriptSrc: String
   },
   components: { editor: Editor },
   setup() {

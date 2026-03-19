@@ -7,13 +7,13 @@
       </div>
     </li>
   </ul>
-  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.classic" :snippet="snippets.full" title="Classic Editor" />
-  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.inline" :snippet="snippets.full" title="Inline Editor" />
+  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.classic" :snippet="snippets.full" title="Classic Editor" tinymceScriptSrc="https://cdn.staging.tiny.cloud/1/451hc4rk1hb0l77jr4loyiutfx7k9fs0decaxvfma65mwulu/tinymce/8-testing/tinymce.min.js"/>
+  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.inline" :snippet="snippets.full" title="Inline Editor" tinymceScriptSrc="https://cdn.staging.tiny.cloud/1/451hc4rk1hb0l77jr4loyiutfx7k9fs0decaxvfma65mwulu/tinymce/8-testing/tinymce.min.js"/>
 </template>
 
 <script>
-import { full } from './settings/settings.ts';
-import { generateConfig } from './settings/configurations.ts';
+import { full } from './settings/settings';
+import { generateConfig } from './configs/config';
 import TinyEditorVue from './components/TinyEditor.vue';
 
 export default {
@@ -25,10 +25,10 @@ export default {
     const baseUrl = window.location.href.indexOf('?') > 0 ? window.location.href.substring(0, window.location.href.indexOf('?')) : window.location.href;
     const params = new URLSearchParams(window.location.search);
     const channel = params.get('channel') || '8-dev';
-    const apiKey = params.get('api-key') || 'prsghhxax677rv082a1zj9b7cgjuoaqysf7h8ayxi5ao43ha';
+    const apiKey = params.get('api-key') || '451hc4rk1hb0l77jr4loyiutfx7k9fs0decaxvfma65mwulu';
     const conf = {
       classic: generateConfig({ excludePlugins: ['tinydrive', 'uploadcare']}),
-      inline: generateConfig({ excludePlugins: ['tinydrive', 'editimage', 'image' ], overrides: { inline: true }})
+      inline: generateConfig({ excludePlugins: ['tinydrive', 'editimage', 'image' ], overrideConfig: { inline: true }})
     }
 
     const snippets = {
@@ -46,6 +46,8 @@ export default {
     { name: '6 Testing', value: '6-testing' },
     { name: '6 Stable', value: '6-stable' },
     ];
+
+    console.log('base url ', baseUrl)
 
     return {
       channels,

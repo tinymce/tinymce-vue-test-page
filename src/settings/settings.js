@@ -102,12 +102,12 @@ export const full = `
     </tbody>
   </table>
   <h1 id="mcetoc_1ipdv0ulf96d">Math</h1>
-  <p>&nbsp;<tiny-math-inline formula="S_\delta"></tiny-math-inline>'s</p>
+  <p>&nbsp;<tiny-math-inline formula="S_\\delta"></tiny-math-inline>'s</p>
   <p><tiny-math-inline formula="{x_{k-1}}{x_k}"></tiny-math-inline></p>
-  <p>&nbsp;<tiny-math-inline formula="S_{\delta_1}"></tiny-math-inline>,&nbsp;<tiny-math-inline formula="S_{\delta_2}"></tiny-math-inline>&nbsp;<tiny-math-inline formula="\displaystyle\mathop{L}_{n\doteq\infty}\delta_n=0"></tiny-math-inline></p>
-  <tiny-math-block formula="\mathop{L}_{n\doteq\infty} S_{\delta_n} = \int_a^b f(x)dx."></tiny-math-block>
+  <p>&nbsp;<tiny-math-inline formula="S_{\\delta_1}"></tiny-math-inline>,&nbsp;<tiny-math-inline formula="S_{\\delta_2}"></tiny-math-inline>&nbsp;<tiny-math-inline formula="\\displaystyle\\mathop{L}_{n\\doteq\\infty}\\delta_n=0"></tiny-math-inline></p>
+  <tiny-math-block formula="\\mathop{L}_{n\\doteq\\infty} S_{\\delta_n} = \\int_a^b f(x)dx."></tiny-math-block>
   <p><sup id="footnote_75157979611745299752311" class="mce-footnote"><a href="#footnotes_entry_75157979611745299752311">1</a></sup></p>
-  <tiny-math-block formula="\displaystyle \int_a^b f(x)dx =  \mathop{L}_{n\doteq\infty} \sum_{k=1}^n f(a+k\Delta x)\Delta x,  \text{ where }  \Delta x=\frac{b-a}{n}."></tiny-math-block>
+  <tiny-math-block formula="\\displaystyle \\int_a^b f(x)dx =  \\mathop{L}_{n\\doteq\\infty} \\sum_{k=1}^n f(a+k\\delta x)\\delta x,  \text{ where }  \\delta x=\frac{b-a}{n}."></tiny-math-block>
   <p>&nbsp;</p>
   <h1 id="mcetoc_1ipdv0ulf96e">Mentions</h1>
   <p><span class="mentionsmentionsmentions" style="color: green;" data-mce-mentions-id="virginiaturner">@virginiaturner</span> <span class="mentionsmentionsmentions" style="color: green;" data-mce-mentions-id="terrygreen333">@terrygreen333</span></p>
