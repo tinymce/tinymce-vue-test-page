@@ -7,8 +7,8 @@
       </div>
     </li>
   </ul>
-  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.classic" :snippet="snippets.full" title="Classic Editor" tinymceScriptSrc="https://cdn.staging.tiny.cloud/1/451hc4rk1hb0l77jr4loyiutfx7k9fs0decaxvfma65mwulu/tinymce/8-testing/tinymce.min.js"/>
-  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.inline" :snippet="snippets.full" title="Inline Editor" tinymceScriptSrc="https://cdn.staging.tiny.cloud/1/451hc4rk1hb0l77jr4loyiutfx7k9fs0decaxvfma65mwulu/tinymce/8-testing/tinymce.min.js"/>
+  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.classic" :snippet="snippets.full" title="Classic Editor"/>
+  <tiny-editor :apiKey="apiKey" :channel="channel" :conf="conf.inline" :snippet="snippets.full" title="Inline Editor"/>
 </template>
 
 <script>
@@ -22,13 +22,17 @@ export default {
     'tiny-editor': TinyEditorVue
   },
   setup() {
+    const configParams = {
+      jwtServerURL: 'https://demo.api.tiny.cloud',
+      apiKey: 'prsghhxax677rv082a1zj9b7cgjuoaqysf7h8ayxi5ao43ha'
+    };
     const baseUrl = window.location.href.indexOf('?') > 0 ? window.location.href.substring(0, window.location.href.indexOf('?')) : window.location.href;
     const params = new URLSearchParams(window.location.search);
     const channel = params.get('channel') || '8-dev';
-    const apiKey = params.get('api-key') || '451hc4rk1hb0l77jr4loyiutfx7k9fs0decaxvfma65mwulu';
+    const apiKey = params.get('api-key') || configParams.apiKey;
     const conf = {
-      classic: generateConfig({ excludePlugins: ['tinydrive', 'uploadcare']}),
-      inline: generateConfig({ excludePlugins: ['tinydrive', 'editimage', 'image' ], overrideConfig: { inline: true }})
+      classic: generateConfig(configParams, { excludePlugins: ['tinydrive', 'uploadcare']}),
+      inline: generateConfig(configParams, { excludePlugins: ['tinydrive', 'editimage', 'image' ], overrideConfig: { inline: true }})
     }
 
     const snippets = {

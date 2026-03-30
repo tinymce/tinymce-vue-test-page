@@ -1,4 +1,3 @@
-import TinymceaiConfig from './tinymceai';
 import AdvtemplateConfig from './advtemplate';
 import AccordionConfig from './accordion';
 import MergetagsConfig from './mergetags';
@@ -55,32 +54,12 @@ import PermanentpenConfig from './permanentpen';
 import PowerpasteConfig from './powerpaste';
 import RevisionhistoryConfig from './revisionhistory';
 import TableofcontentsConfig from './tableofcontents';
+import TinymceaiConfig from './tinymceai';
 import TinymcespellcheckerConfig from './tinymcespellchecker';
 import TypographyConfig from './typography';
 import UploadcareConfig from './uploadcare';
 
-
-const API_URL = 'https://demouserdirectory.tiny.cloud/v1/users';
-
-const user_id = 'james-wilson';
-const basicConfig = {
-  height: 600,
-  mobile: {
-    theme: "silver",
-    contextmenu: "link image table preview",
-  },
-  pad_empty_with_br: true,
-  help_accessibility: true,
-  // TODO: Target for tinymce 8
-  user_id,
-  fetch_users: (userIds) =>
-    Promise.all(userIds.map((userId) => fetch(`${API_URL}/${userId}`)
-      .then((response) => response.json())
-      .catch(() => ({ id: userId })))),
-  
-};
-
-const pluginsConfig = [
+const pluginConfigs = [
   AccordionConfig,
   CodeSampleConfig,
   AdvlistConfig,
@@ -143,15 +122,36 @@ const pluginsConfig = [
   TinymceaiConfig,
 ];
 
-const toolbarConfig = pluginsConfig.map((plugin) => plugin?.toolbar).filter(Boolean).join(' | ');
-const generateConfig = ({ excludePlugins = [], overrideConfig = {} }) => {
-  const plugins = pluginsConfig.map((p) => p.name).filter((name) => !excludePlugins.includes(name));
-  const extractedPluginsConfig = pluginsConfig.reduce((acc, cur) => {
-    return { ...acc, ...cur.config };
-  }, {});
+const API_URL = 'https://demouserdirectory.tiny.cloud/v1/users';
+
+const user_id = 'james-wilson';
+const basicConfig = {
+  height: 600,
+  mobile: {
+    theme: "silver",
+    contextmenu: "link image table preview",
+  },
+  pad_empty_with_br: true,
+  help_accessibility: true,
+  // TODO: Target for tinymce 8
+  user_id,
+  fetch_users: (userIds) =>
+    Promise.all(userIds.map((userId) => fetch(`${API_URL}/${userId}`)
+      .then((response) => response.json())
+      .catch(() => ({ id: userId }))))
+};
+
+const generateConfig = (params, {excludePlugins, overrideConfig}) => {
+  const normalizedPluginConfigs = pluginConfigs.reduce((acc, plugin) => {
+    const pConfig = typeof plugin === 'function' ? plugin(params) : plugin;
+    return acc.concat(pConfig);
+  }, []);
+  const toolbarConfig = normalizedPluginConfigs.map((plugin) => plugin?.toolbar).filter(Boolean).join(' | ');
+  const plugins = normalizedPluginConfigs.map((p) => p.name).filter((name) => !excludePlugins?.includes(name));
+  const allConfigFromPlugins = normalizedPluginConfigs.reduce((acc, cur) => ({ ...acc, ...cur.config }), {});
   const finalConfig = {
     ...basicConfig,
-    ...extractedPluginsConfig,
+    ...allConfigFromPlugins,
     ...overrideConfig
   };
 
@@ -164,6 +164,6 @@ const generateConfig = ({ excludePlugins = [], overrideConfig = {} }) => {
 }
 
 
-export {
+export  {
   generateConfig
 };
