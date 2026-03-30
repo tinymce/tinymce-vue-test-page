@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>{{ title }}</h2>
-    <editor :cloudChannel="channel" :api-key="apiKey" :init="conf" :initialValue="snippet" :tinymceScriptSrc="tinymceScriptSrc"/>
+    <editor :cloudChannel="channel" :api-key="apiKey" :init="conf" :initialValue="snippet"/>
   </div>
 </template>
 <script>
